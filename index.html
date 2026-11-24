@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Люблю Диану</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ffb6d5, #fff 28%, #fff 72%, #ffb6d5);
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  min-height: 440px;
+  padding: 32px 20px;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 10px 40px #ff8fbd55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+h1 {
+  color: #ff4f91;
+  font-size: clamp(25px, 6vw, 32px);
+  line-height: 1.3;
+  position: relative;
+  z-index: 2;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 110px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 3;
+}
+
+button {
+  border: 0;
+  border-radius: 15px;
+  padding: 14px 30px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.yes {
+  background: #ff4f91;
+  color: white;
+  box-shadow: 0 5px 15px #ff4f9155;
+}
+
+.no {
+  background: #eee;
+  color: #777;
+}
+
+.hidden { display: none !important; }
+.slide-out {
+  animation: slideOut .5s ease forwards;
+  pointer-events: none;
+}
+.slide-in {
+  animation: slideIn .65s cubic-bezier(.22,.8,.25,1) both;
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-35px); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.heart-scene {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  margin: 12px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-heart {
+  width: 105px;
+  height: 105px;
+  position: relative;
+  background: #ff6fa8;
+  transform: rotate(-45deg);
+  border-radius: 12px 0 12px 12px;
+  filter: drop-shadow(0 8px 12px #ff8fbd55);
+  animation: heartbeat 1.5s ease-in-out infinite;
+  z-index: 2;
+}
+
+.big-heart::before,
+.big-heart::after {
+  content: "";
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  background: #ff6fa8;
+  border-radius: 50%;
+}
+
+.big-heart::before { top: -52px; left: 0; }
+.big-heart::after { top: 0; left: 52px; }
+
+@keyframes heartbeat {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.12); }
+}
+
+/* Надписи Love you */
+.love-word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: #ff75aa;
+  font-size: 17px;
+  font-weight: bold;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: floatAway 2.2s ease-out infinite;
+  text-shadow: 0 2px 8px #ffc1d8;
+}
+
+.love-word:nth-child(2) { --x: -105px; --y: -85px; animation-delay: 0s; }
+.love-word:nth-child(3) { --x: 85px; --y: -100px; animation-delay: .25s; }
+.love-word:nth-child(4) { --x: -120px; --y: 45px; animation-delay: .5s; }
+.love-word:nth-child(5) { --x: 105px; --y: 55px; animation-delay: .75s; }
+.love-word:nth-child(6) { --x: 0px; --y: -125px; animation-delay: 1s; }
+.love-word:nth-child(7) { --x: -65px; --y: 105px; animation-delay: 1.25s; }
+.love-word:nth-child(8) { --x: 125px; --y: -20px; animation-delay: 1.5s; }
+.love-word:nth-child(9) { --x: -125px; --y: -25px; animation-delay: 1.75s; }
+.love-word:nth-child(10) { --x: 55px; --y: 115px; animation-delay: 2s; }
+
+@keyframes floatAway {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.65);
+  }
+  15% { opacity: 1; }
+  75% { opacity: .8; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.08);
+  }
+}
+
+.love-message {
+  position: relative;
+  z-index: 3;
+  color: #ff4f91;
+  font-size: 23px;
+  line-height: 1.6;
+}
+
+.love-message p { margin-top: 10px; }
+
+@media (max-width: 400px) {
+  .container { min-height: 410px; padding: 25px 12px; }
+  button { padding: 12px 22px; font-size: 17px; }
+  .heart-scene { transform: scale(.9); margin: 0 auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Первый вопрос -->
+<section class="container" id="first">
+  <h1>Ты меня любишь? </h1>
+  <div class="buttons">
+    <button class="yes" id="yes1" onclick="nextQuestion()">Да</button>
+    <button class="no" id="no1" onclick="shrink(1)">Нет</button>
+  </div>
+</section>
+
+
+<section class="container hidden" id="second">
+  <div id="questionContent">
+    <h1>Ты будешь моей девушкой?</h1>
+
+    <div class="heart-scene" aria-label="Розовое сердце и надписи Love you">
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <div class="big-heart"></div>
+    </div>
+
+    <div class="buttons">
+      <button class="yes" id="yes2" onclick="showLove()">Да</button>
+      <button class="no" id="no2" onclick="shrink(2)">Нет</button>
+    </div>
+  </div>
+
+  <div id="loveMessage" class="hidden love-message">
+    <div class="heart-scene">
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <span class="love-word">Love you</span>
+      <div class="big-heart"></div>
+    </div>
+    <h1>Ты самая лучшая Я очень тебя люблю мне правда очень нравится проводить с тобой время смеяться вместе и просто быть рядом С тобой даже обычные моменты становятся особенными</h1>
+  </div>
+</section>
+
+<script>
+let clicks1 = 0;
+let clicks2 = 0;
+
+function shrink(page) {
+  const yes = document.getElementById(page === 1 ? "yes1" : "yes2");
+  const no = document.getElementById(page === 1 ? "no1" : "no2");
+
+  if (page === 1) clicks1 = Math.min(clicks1 + 1, 4);
+  else clicks2 = Math.min(clicks2 + 1, 4);
+
+  const clicks = page === 1 ? clicks1 : clicks2;
+  yes.style.transform = `scale(${1 + clicks * 0.25})`;
+  no.style.transform = `scale(${1 - clicks * 0.25})`;
+
+  if (clicks === 4) {
+    no.style.display = "none";
+    yes.style.transform = "scale(2)";
+  }
+}
+
+function nextQuestion() {
+  const first = document.getElementById("first");
+  const second = document.getElementById("second");
+
+  first.classList.add("slide-out");
+
+  setTimeout(() => {
+    first.classList.add("hidden");
+    first.classList.remove("slide-out");
+
+    second.classList.remove("hidden");
+    second.classList.add("slide-in");
+  }, 500);
+}
+
+function showLove() {
+  const question = document.getElementById("questionContent");
+  const message = document.getElementById("loveMessage");
+
+  question.classList.add("slide-out");
+
+  setTimeout(() => {
+    question.classList.add("hidden");
+    question.classList.remove("slide-out");
+
+    message.classList.remove("hidden");
+    message.classList.add("slide-in");
+  }, 500);
+}
+</script>
+</body>
+</html>
